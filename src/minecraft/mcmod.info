@@ -1,0 +1,19 @@
+[
+{
+  "modid": "mod_NetherEssence",
+  "name": "Nether Essence Mod",
+  "description": "Adds Nether Essence, a substance crafted from Netherrack, Soulsand and water. It can be used as a fuel source, a light source or for crafting gunpowder.",
+  "version": "1.0.1",
+  "mcversion": "1.6.2",
+  "url": "",
+  "updateUrl": "",
+  "credits": "By Flayr",
+  "authorList": [ "Flayr" ],
+  "logoFile": "",
+  "screenshots": [
+  ],
+  "parent":"",
+  "dependencies": [
+  ]
+}
+]
