@@ -49,7 +49,7 @@ public class NetherEssence
 
             config.load();
             netherDustBlockID = config.getBlock("netherDustBlock", 671).getInt();
-            netherDustID = config.getItem("netherDust", 31743).getInt();
+            netherDustID = config.getItem("netherDust", 2526).getInt();
             config.save();
         }
         
