@@ -7,6 +7,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -30,15 +31,13 @@ public class NetherEssence
     static final String MOD_NAME = "NetherEssence";
     static final String MOD_VERSION = "1.0.1";
     static final String SOURCE_PATH = "flayr.netheressence.";
-      
+    private static int netherDustBlockID;
+    private static int netherDustID;
+    public static Item netherDust;
+    public static Block netherDustBlock;
+    
         @Mod.Instance("MOD_ID")
         public static NetherEssence instance;
-
-        final static Item netherDust = new NetherDust(2270);
-
-        public final static Block netherDustBlock = new NetherDustBlock(671, Material.rock)
-        .setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setLightValue(0.8f)
-        .setUnlocalizedName("netherDustBlock").setCreativeTab(CreativeTabs.tabBlock);
 
         @SidedProxy(clientSide="flayr.netheressence.client.ClientProxy",
                         serverSide="flayr.netheressence.CommonProxy")
@@ -46,11 +45,22 @@ public class NetherEssence
         
         @EventHandler
         public void preInit(FMLPreInitializationEvent event) {
-                // Stub Method
+            Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+
+            config.load();
+            netherDustBlockID = config.getBlock("netherDustBlock", 671).getInt();
+            netherDustID = config.getItem("netherDust", 31743).getInt();
+            config.save();
         }
         
-        @Mod.EventHandler
+        @EventHandler
         public void load(FMLInitializationEvent event) {
+            netherDust = new NetherDust(netherDustID);
+            
+            netherDustBlock = new NetherDustBlock(netherDustBlockID, Material.rock)
+            .setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setLightValue(0.8f)
+            .setUnlocalizedName("netherDustBlock").setCreativeTab(CreativeTabs.tabBlock);
+            
         	ItemStack dustStack = new ItemStack(netherDust);
         	ItemStack waterStack = new ItemStack(Item.bucketWater);
         	ItemStack soulStack = new ItemStack(Block.slowSand);
