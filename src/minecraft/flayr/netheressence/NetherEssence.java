@@ -28,13 +28,19 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 public class NetherEssence
 {
     public static final String MOD_ID = "NetherEssence";
-    static final String MOD_NAME = "NetherEssence";
-    static final String MOD_VERSION = "1.0.1";
+    static final String MOD_NAME = "Nether Essence";
+    static final String MOD_VERSION = "1.0.3";
     static final String SOURCE_PATH = "flayr.netheressence.";
     private static int netherDustBlockID;
     private static int netherDustID;
     public static Item netherDust;
     public static Block netherDustBlock;
+    
+	public static CreativeTabs tabNetherEssence = new CreativeTabs("tabNetherEssence"){
+		public ItemStack getIconItemStack(){
+			return new ItemStack(netherDust);
+		}
+	};
     
         @Mod.Instance("MOD_ID")
         public static NetherEssence instance;
@@ -59,7 +65,7 @@ public class NetherEssence
             
             netherDustBlock = new NetherDustBlock(netherDustBlockID, Material.rock)
             .setHardness(1.0F).setStepSound(Block.soundStoneFootstep).setLightValue(0.8f)
-            .setUnlocalizedName("netherDustBlock").setCreativeTab(CreativeTabs.tabBlock);
+            .setUnlocalizedName("netherDustBlock").setCreativeTab(NetherEssence.tabNetherEssence);
             
         	ItemStack dustStack = new ItemStack(netherDust);
         	ItemStack waterStack = new ItemStack(Item.bucketWater);
@@ -69,13 +75,13 @@ public class NetherEssence
         	ItemStack redStack = new ItemStack(Item.redstone);
         	ItemStack potionStack = new ItemStack(Item.potion);
         	
-        	GameRegistry.addRecipe(new ItemStack(netherDust, 3), "xxx", "yzy", "xxx",
+        	GameRegistry.addRecipe(new ItemStack(netherDust, 4), "xxx", "yzy", "xxx",
         	        'x', netherrackStack, 'y', soulStack, 'z', waterStack);
-        	GameRegistry.addRecipe(new ItemStack(netherDust, 3), "xyx", "xzx", "xyx",
+        	GameRegistry.addRecipe(new ItemStack(netherDust, 4), "xyx", "xzx", "xyx",
         	        'x', netherrackStack, 'y', soulStack, 'z', potionStack);
-        	GameRegistry.addRecipe(new ItemStack(netherDust, 3), "xyx", "xzx", "xyx",
+        	GameRegistry.addRecipe(new ItemStack(netherDust, 4), "xyx", "xzx", "xyx",
         	        'x', netherrackStack, 'y', soulStack, 'z', waterStack);
-        	GameRegistry.addRecipe(new ItemStack(netherDust, 3), "xxx", "yzy", "xxx",
+        	GameRegistry.addRecipe(new ItemStack(netherDust, 4), "xxx", "yzy", "xxx",
         	        'x', netherrackStack, 'y', soulStack, 'z', potionStack);
         	GameRegistry.addRecipe(new ItemStack(Item.gunpowder), "drd", "rcr", "drd",
         	        'd', dustStack, 'r', redStack, 'c', coalStack);
@@ -85,11 +91,12 @@ public class NetherEssence
         	        'x', dustStack);
         	GameRegistry.addShapelessRecipe(new ItemStack(netherDust, 8), new ItemStack(netherDustBlock));
         	    
-                LanguageRegistry.addName(netherDust, "Nether Essence");
-                LanguageRegistry.addName(netherDustBlock, "Nether Essence Block");
-                MinecraftForge.setBlockHarvestLevel(netherDustBlock, "pick", 0);
-                GameRegistry.registerBlock(netherDustBlock, "netherDustBlock");
-                GameRegistry.registerFuelHandler(new NetherEssenceFuelHandler());
+            LanguageRegistry.addName(netherDust, "Nether Essence");
+            LanguageRegistry.addName(netherDustBlock, "Nether Essence Block");
+            LanguageRegistry.instance().addStringLocalization("itemGroup.tabNetherEssence", "en_US", MOD_NAME);
+            MinecraftForge.setBlockHarvestLevel(netherDustBlock, "pick", 0);
+            GameRegistry.registerBlock(netherDustBlock, "netherDustBlock");
+            GameRegistry.registerFuelHandler(new NetherEssenceFuelHandler());
         }
         
         @Mod.EventHandler

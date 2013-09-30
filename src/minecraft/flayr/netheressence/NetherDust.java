@@ -13,7 +13,7 @@ public class NetherDust extends Item {
                 
                 // Constructor Configuration
                 maxStackSize = 64;
-                setCreativeTab(CreativeTabs.tabMaterials);
+                setCreativeTab(NetherEssence.tabNetherEssence);
                 setUnlocalizedName("netherDust");
         }
         
